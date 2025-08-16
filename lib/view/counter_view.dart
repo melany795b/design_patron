@@ -65,6 +65,7 @@ class CounterView extends StatelessWidget {
                   ),
                   child: const Icon(Icons.refresh),
                 ),
+                const SizedBox(width: 10),
               ],
             ),
           ],
