@@ -1,43 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../viewmodel/counter_viewmodel.dart';
+import '../viewmodel/counter_viewmodel_two.dart';
 
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => CounterViewModel(),
-      child: const MainApp(),
-    ),
-  );
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class CounterViewTwo extends StatelessWidget {
+  const CounterViewTwo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: CounterView(),
-    );
-  }
-}
-
-class CounterView extends StatelessWidget {
-  const CounterView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final counterViewModel = Provider.of<CounterViewModel>(context);
+    final counterViewModel = Provider.of<CounterViewModelTwo>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Contador con MVVM')),
+      appBar: AppBar(title: const Text('Contador de Users')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Contador motos: ${counterViewModel.count}",
+              "Contador users: ${counterViewModel.count}",
               style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 20),
@@ -65,7 +44,6 @@ class CounterView extends StatelessWidget {
                   ),
                   child: const Icon(Icons.refresh),
                 ),
-                const SizedBox(width: 10),
               ],
             ),
           ],

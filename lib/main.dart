@@ -1,14 +1,18 @@
-// Archivo: lib/main.dart
-
-import 'package:design_patron/view/counter_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../viewmodel/counter_viewmodel.dart';
+import 'view/screen/main_screen.dart';
+import 'viewmodel/counter_viewmodel.dart';
+import 'viewmodel/counter_viewmodel_two.dart'; // 👈 importa el segundo ViewModel
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => CounterViewModel(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CounterViewModel()), // para motos
+        ChangeNotifierProvider(
+          create: (_) => CounterViewModelTwo(),
+        ), // para users
+      ],
       child: const MainApp(),
     ),
   );
@@ -19,9 +23,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CounterView(),
+      theme: ThemeData(
+        useMaterial3: true,
+        actionIconTheme: const ActionIconThemeData(),
+      ),
+      home: const MainScreen(),
     );
   }
 }
